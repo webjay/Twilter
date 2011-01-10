@@ -80,8 +80,12 @@
 		}
 
 		final private function get_parameters () {
-			$this->parameters['track'] = implode(',', $this->track);
-			$this->parameters['locations'] = implode(',', $this->locationBoxes);
+			if (!empty($this->track)) {
+				$this->parameters['track'] = implode(',', $this->track);
+			}
+			if (!empty($this->locationBoxes)) {
+				$this->parameters['locations'] = implode(',', $this->locationBoxes);
+			}
 			return $this->parameters;
 		}
 		
