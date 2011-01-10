@@ -82,8 +82,7 @@
 		final private function get_parameters () {
 			$this->parameters['track'] = implode(',', $this->track);
 			$this->parameters['locations'] = implode(',', $this->locationBoxes);
-			parse_str(http_build_query($this->parameters), $oauth_url_parameters);
-			return $oauth_url_parameters;
+			return $this->parameters;
 		}
 		
 		/**
@@ -119,14 +118,14 @@
 			}
 			stream_set_blocking($this->stream, 1);
 			$this->log(print_r(stream_get_meta_data($this->stream), true), 2);
-			
+			// reset connect failures
 			$this->connectFailures = 0;
 		}
 		
 		/**
 		 * Start receiving the stream.
 		 * Output is sent to output.
-		 * @see twilter::output
+		 * @see Twilter::output
 		 */
 		final public function stream_start () {
 			while (!feof($this->stream)) { 
@@ -216,7 +215,7 @@
 		}
 
 		/**
-		* twilter::setLocationsByCircle(array(
+		* Twilter::setLocationsByCircle(array(
 		* 	array(Longitude, Latitude, radius in km)
 		* ));
 		*  
